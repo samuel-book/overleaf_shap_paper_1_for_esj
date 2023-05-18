@@ -1,0 +1,17 @@
+\section*{Abstract}
+
+\emph{Objectives}: To understand between-hospital variation in thrombolysis use among emergency stroke admissions in England and Wales.
+
+\emph{Design}: Machine learning was applied to the Sentinel Stroke National Audit Programme (SSNAP)  data set, to learn which patients in each hospital would likely receive thrombolysis.
+
+\emph{Setting}: All hospitals (n=132) providing emergency stroke care in England and Wales. 
+
+\emph{Participants}: 88,928 patients who arrived at hospital within 4 hours of stroke onset, from 2016 to 2018.
+
+\emph{Intervention}: XGBoost machine learning models, with a SHAP model for explainability.
+
+\emph{Main Outcome Measures}: Shapley (SHAP) values, providing estimates of how patient features, and hospital identity, influence the odds of receiving thrombolysis.
+
+\emph{Results}: Thrombolysis use in patients arriving within 4 hours of known or estimated stroke onset ranged 7\%-49\% between hospitals. The odds of receiving thrombolysis reduced 9-fold over the first 120 minutes of arrival-to-scan time, varied 30-fold with stroke severity, reduced 3-fold with estimated rather than precise stroke onset time, fell 6-fold with increasing pre-stroke disability, fell 4-fold with onset during sleep, fell 5-fold with use of anticoagulants, fell 2-fold between 80-110 years of age, reduced 3 fold between 120-240 minutes of onset-to-arrival time, and varied 13-fold between hospitals. The majority of between-hospital variance was explained by the hospital, rather than the differences in local patient populations.
+
+\emph{Conclusions}: Using explainable machine learning, we identified that the majority of the between-hospital variation in thrombolysis use in England and Wales may be explained by differences in in-hospital processes and differences in attitudes to judging suitability for thrombolysis.
