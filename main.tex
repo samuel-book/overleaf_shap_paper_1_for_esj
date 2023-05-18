@@ -18,6 +18,7 @@
 \usepackage{subcaption} % Allows use of subfigures
 \DeclareUnicodeCharacter{2060}{\nolinebreak} % Prevent unicode (U+2060) error on local complile
 \usepackage{cclicenses} % For creative commons license
+\usepackage{verbatim} % Used for word count
 
 
 % Choose your own colour
@@ -34,18 +35,6 @@
 \hbadness=1000000 % Turn off \hbox badness warnings
 
 
-% Add wordcounts
-\usepackage{verbatim}
-
-\newcommand{\detailtexcount}[1]{%
-  \immediate\write18{texcount -merge -sum -total -quiet  #1.tex output.bbl > #1.wcdetail }%
-  \verbatiminput{#1.wcdetail}%
-}
-
-\newcommand{\quickwordcount}[1]{%
-  \immediate\write18{texcount -1 -sum -merge -q #1.tex output.bbl > #1-words.sum }%
-  \input{#1-words.sum} words%
-}
 
 
 \begin{document}
@@ -56,15 +45,13 @@
 % To include refs in word count:
 %TC:incbib
 
+% Ignore title and abstract in word count
 %TC:ignore
 \include{sections/1_title}
-
 \maketitle
-
 
 \include{sections/2_abstract}
 %TC:endignore
-
 
 \newpage
 
@@ -76,21 +63,15 @@
 \input{sections/6_discussion}
 
 \section{References}
-\bibliographystyle{naturemag}
+%\bibliographystyle{naturemag}
+\bibliographystyle{SageV}
 %\bibliographystyle{plainnat}
 %\bibliographystyle{unsrt}
 %\bibliographystyle{unsrtnat}
 \bibliography{references}
 
-% Force new page
-\clearpage
-\newpage
-% Use * to avoid numbering of section
 \input{sections/7_extras}
-
-% Force new page
-\clearpage
-\newpage
+%\input{sections/8_word_count}
 
 %TC:ignore
 %\include{sections/appendix}
