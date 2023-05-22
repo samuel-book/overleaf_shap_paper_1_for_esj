@@ -14,7 +14,7 @@ Data were retrieved for 246,676 emergency stroke admissions to acute stroke team
 
 \subsection{Machine learning models (to predict thrombolysis use)}
 
-We used an \emph{eXtreme Gradient Boosting model \cite{chen_xgboost_2016}} (`XGBoost') to predict the probability of use of thrombolysis for each patient from their other feature values.
+We used XGBoost \cite{chen_xgboost_2016} to predict the probability of use of thrombolysis for each patient from their other feature values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -34,11 +34,11 @@ Model accuracy, ROC AUC, sensitivity and specificity were measured using stratif
 
 For the different analysis included in this paper, we trained three XGBoost models:
 \begin{enumerate}
-    \item \emph{K-fold model}: A 5-fold train-test cross validation used to  test the accuracy of the model, and to test reproducibility of SHAP values.
+    \item \emph{K-fold} model: A 5-fold train-test cross validation used to test the accuracy of the model, and to test reproducibility of SHAP values.
        
-    \item \emph{All data model}: A single model trained on all patients, use to investigate the relationship between feature values and predictions.
+    \item \emph{All data} model: A single model trained on all patients, used to investigate the relationship between feature values and predictions.
     
-    \item \emph{10k holdout model}: A model trained all data apart from a 10k hold-out set. This model is used to mimic a 10k cohort of patients that attends all hospitals (by changing the hospital encoding) to further investigate variation in thrombolysis decision-making between hospitals.
+    \item \emph{10k holdout} model: A model trained on all data apart from a 10k hold-out set. This model is used to mimic a 10k cohort of patients that attends all hospitals (by changing the hospital encoding) to further investigate variation in thrombolysis decision-making between hospitals.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,40 +62,40 @@ To reveal the variation in thrombolysis rate due to hospital, rather than patien
 
 \subsection{Investigating how patient populations and hospital identity and processes influences thrombolysis rate}
 
-The 10 features in the model can be classified into two subsets: 1) `patient descriptive features' (features that describe the patients characteristics), and 2) `hospital descriptive features' (features that describe the hospital’s identity or processes). To analyse the influence that each subset of features has on the thromoblysis rate, we calculated the `subset SHAP value' for each feature, which only includes the components of its SHAP value that contain effects from the features in the same subset. This is expressed as the sum of the main effect and the interaction effects with the other features in the same subset. Multiple regression models were then fitted to the mean subset SHAP values.
+The 10 features in the model can be classified into two subsets: 1) `patient descriptive features' (features that describe the patients characteristics), and 2) `hospital descriptive features' (features that describe the hospital’s identity or processes). To analyse the influence that each subset of features has on the thrombolysis rate, using values from the \emph{all data} model, we calculated the `subset SHAP value' for each feature, which only includes the components of its SHAP value that contain effects from the features in the same subset. This is expressed as the sum of the main effect and the interaction effects with the other features in the same subset. Multiple regression models were then fitted to the mean subset SHAP values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Variation in hospital thrombolysis use for patient subgroups}
 
-Informed by the SHAP values, we analysed the observed and predicted use of thrombolysis in eleven subgroups of patients: one subgroup for `ideally' thrombolysable patients, nine `sub-optimal' thrombolysable patient subgroups (one subgroup per feature), and one subgroup with two sub-optimal features The eleven patient subgroups were defined as:
+Informed by the SHAP values, we analysed the observed and predicted use of thrombolysis in eleven subgroups of patients: one subgroup for `ideally' thrombolysable patients, nine `sub-optimal' thrombolysable patient subgroups (one subgroup per feature), and one subgroup with two sub-optimal features. The eleven patient subgroups were defined as:
 
 \begin{enumerate}
   \item An \emph{`ideally'} thrombolysable patient:
   \begin{itemize}
     \setlength\itemsep{-2mm}
-    \item NIHSS in range 10-25
-    \item Arrival-to-scan time $<$30 minutes
     \item Stroke caused by infarction
+    \item Arrival-to-scan time $<$30 minutes
+    \item NIHSS in range 10-25
     \item Precise stroke onset time known
-    \item No pre-stroke disability (mRS 0)
+    \item No pre-stroke disability (modified Rankin Scale, mRS, 0)
     \item Not taking atrial fibrillation anticoagulants
     \item Onset-to-arrival time $<$90 minutes
-    \item Age $<$80
+    \item Age $<$80 years old
     \item Onset not during sleep
   \end{itemize}
-  \item NIHSS $<$5
-  \item Imprecisely onset time
-  \item Existing pre-stroke disability (mRS $>$2)
   \item Haemorrhagic stroke
-  \item 60-90 minutes arrival-to-scan time
-  \item Patients using AF anticoagulants
-  \item 150-180 minutes onset-to-arrival time
+  \item Arrival-to-scan time 60-90 minutes
+  \item NIHSS $<$5
+  \item Estimated stroke onset time
+  \item Existing pre-stroke disability (mRS $>$2)
+  \item Using atrial fibrillation anticoagulants
+  \item Onset-to-arrival time 150-180 minutes
+  \item Age 80+ years old
   \item Onset during sleep
-  \item Age 80+
   \item NIHSS $<$ 5 \emph{and} with estimated stroke onset time
 \end{enumerate}
 
-The observed thrombolysis use for each subgroup at each hospital was taken from the SSNAP dataset. In order to further reveal the variation in thrombolysis that was due to hospital decision-making we predicted thrombolysis use for the same patient subgroups at each hospital by using the \emph{10k holdout} model.
+The observed thrombolysis use for each subgroup at each hospital was taken from the SSNAP dataset. In order to further reveal the variation in thrombolysis use that was due to hospital decision-making we predicted thrombolysis use for the same patient subgroups at each hospital by using the \emph{10k holdout} model.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
