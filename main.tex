@@ -20,6 +20,9 @@
 \usepackage{cclicenses} % For creative commons license
 \usepackage{verbatim} % Used for word count
 
+% Have different references in Appendix
+\usepackage{multibib}
+\newcites{appendix}{References for Appendix}
 
 % Choose your own colour
 \usepackage{color}
@@ -53,16 +56,14 @@
 \include{sections/2_abstract}
 %TC:endignore
 
-\newpage
-
 %\tableofcontents
-%\newpage
+\newpage
 \input{sections/3_introduction}  % Use input instead of include to avoid page break at end
 \input{sections/4_methods}
 \input{sections/5_results}
 \input{sections/6_discussion}
 
-\section{References}
+%\section{References}
 \bibliographystyle{naturemag}
 %\bibliographystyle{plainnat}
 %\bibliographystyle{unsrt}
